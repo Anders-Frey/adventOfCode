@@ -67,18 +67,11 @@ func reportIsSafe(report string) bool {
 			return false
 		}
 
-		// if diff < 0 { // detected descending
-		// 	if index == 0 { // if first time, set safe range to descending
-		// 		safeRange = []int{-1, -2, -3}
-		// 	} else { // no further changes allowed!
-		// 		return false
-		// 	}
-		// }
-
 		if !slices.Contains(safeRange, int(diff)) {
 			return false
 		}
 	}
+
 	// report back with report on report safety
 	// (actaully, I don't we will ever reach this point?)
 	fmt.Printf("Huh, it was really possible to get to here!.\n")
