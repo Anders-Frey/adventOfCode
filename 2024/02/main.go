@@ -25,7 +25,7 @@ func main() {
 		line := scanner.Text()
 		fmt.Printf("\nWorking on this line %s\n", line)
 
-		if reportIsSafe(line) {
+		if reportIsSafe(line) || reportIsKindaSafe(line) {
 			fmt.Printf("Report is safe\n")
 			safeReports++
 		} else {
@@ -61,7 +61,6 @@ func reportIsSafe(report string) bool {
 		}
 
 		diff := next - current
-		fmt.Printf("#%d: Current: %d. Next: %d. Diff: %d \n", index, current, next, diff)
 
 		if diff == 0 {
 			return false
@@ -76,4 +75,22 @@ func reportIsSafe(report string) bool {
 	// (actaully, I don't we will ever reach this point?)
 	fmt.Printf("Huh, it was really possible to get to here!.\n")
 	return true
+}
+
+func reportIsKindaSafe(report string) bool {
+	fmt.Printf("  Report failed first test:\n")
+	fmt.Printf("    Applying Problem Dampener to check if report is kinda safe\n")
+	// Remove one element at the time to kinda check for safety
+	reportNumbers := strings.Fields(report)
+	for index, number := range reportNumbers {
+		truncatedReport := append([]string(nil), reportNumbers...)
+		truncatedReport = slices.Delete(truncatedReport, index, index+1)
+
+		fmt.Printf("Checking without %s\n", number)
+		if reportIsSafe(strings.Join(truncatedReport, " ")) {
+			return true
+		}
+
+	}
+	return false
 }
