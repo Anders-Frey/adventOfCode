@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	file, err := os.Open("input")
+	file, err := os.Open("./../input")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
@@ -19,11 +19,8 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
-	// For part two we need to adhere to the do() and don't() commands.
-	// Don't know if regex will still cut it, but they might look like this:
-	// `do()\b` and `don't()\b`
-
 	multiplicationPattern := regexp.MustCompile(`mul\(\d{1,3},\d{1,3}\)`)
+
 	multiplicationTasks := []string{}
 
 	for scanner.Scan() {
