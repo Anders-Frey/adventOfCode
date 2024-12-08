@@ -33,12 +33,8 @@ func main() {
 	sum := 0
 	sum += Horizontal(inputAsSlice)
 	sum += Vertical(inputAsSlice)
-	// TODO STATUS: Horizontal and Vertical looks ok. Diagonal is the only one left
-	// but also the worst probably
-	//	sum += DiagonalRightUp(input)
-	//	sum += DiagonalRightDown(input)
-	//	sum += DiagonalLeftUp(input)
-	//	sum += DiagonalLeftDown(input)
+	sum += DiagonalRightUp(inputAsSlice)
+	sum += DiagonalRightDown(inputAsSlice)
 
 	fmt.Printf("Found %d XMAS\n", sum)
 }
@@ -82,6 +78,56 @@ func Vertical(input [][]rune) int {
 		}
 	}
 	fmt.Printf("Vertical found #%d XMAS\n", sum)
+	return sum
+}
+
+func DiagonalRightUp(input [][]rune) int {
+	fmt.Printf("Looking Diagonal Right Up - both ways\n")
+	sum := 0
+
+	for indexX := 3; indexX < len(input); indexX++ { // Don't start at top, there's no room
+		for indexY := 0; indexY < len(input); indexY++ {
+			fmt.Printf("Doing %d,%d\n", indexX, indexY)
+			if indexY+3 >= len(input) {
+				fmt.Printf("Reached end at %d,%d\n", indexX, indexY)
+				continue
+			}
+			sequenceToCheck := []rune{
+				input[indexX][indexY],
+				input[indexX-1][indexY+1],
+				input[indexX-2][indexY+2],
+				input[indexX-3][indexY+3],
+			}
+			fmt.Printf("Checking sequence: %c\n", sequenceToCheck)
+			sum += CheckForXMAS(sequenceToCheck)
+		}
+	}
+	fmt.Printf("Diagonal Right Up found #%d XMAS\n", sum)
+	return sum
+}
+
+func DiagonalRightDown(input [][]rune) int {
+	fmt.Printf("Looking Diagonal Right Down - both ways\n")
+	sum := 0
+
+	for indexX := 0; indexX < len(input)-3; indexX++ {
+		for indexY := 0; indexY < len(input); indexY++ {
+			fmt.Printf("Doing %d,%d\n", indexX, indexY)
+			if indexY+3 >= len(input) {
+				fmt.Printf("Reached end at %d,%d\n", indexX, indexY)
+				continue
+			}
+			sequenceToCheck := []rune{
+				input[indexX][indexY],
+				input[indexX+1][indexY+1],
+				input[indexX+2][indexY+2],
+				input[indexX+3][indexY+3],
+			}
+			fmt.Printf("Checking sequence: %c\n", sequenceToCheck)
+			sum += CheckForXMAS(sequenceToCheck)
+		}
+	}
+	fmt.Printf("Diagonal Right Up found #%d XMAS\n", sum)
 	return sum
 }
 
