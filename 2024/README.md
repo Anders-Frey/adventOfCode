@@ -1,9 +1,13 @@
-## Notes
+# 2024
+https://adventofcode.com/2024/
 
-### Day 2
+## 01
+Answers printed out when running `main.go`
+
+## 02
 - Heh, the input list is sorted. All the unsafe reports comes first, and the all the safe reports come after.
 
-### Day 4  
+## 04  
 The test_input looks like this and contains 18 "XMAS"
 
 ```
