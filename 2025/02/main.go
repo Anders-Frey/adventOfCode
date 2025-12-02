@@ -9,6 +9,9 @@ import (
 )
 
 func main() {
+	// Result variable starts at 0
+	result := 0
+
 	file, err := os.Open("input_anders")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -73,6 +76,8 @@ func main() {
 				// Compare the two strings and check if they are equal
 				if firstHalf == secondHalf {
 					fmt.Printf("Number %d: halves are EQUAL (%s == %s)\n", num, firstHalf, secondHalf)
+					// For each instance of equal strings, add the original integer to the result
+					result += num
 				} else {
 					fmt.Printf("Number %d: halves are NOT equal (%s != %s)\n", num, firstHalf, secondHalf)
 				}
@@ -83,4 +88,7 @@ func main() {
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error reading file:", err)
 	}
+
+	// In the end, print out the result
+	fmt.Printf("\nResult: %d\n", result)
 }
